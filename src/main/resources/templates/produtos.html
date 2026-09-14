@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>DevTeck - Produtos</title>
+    <link rel="stylesheet" th:href="@{/css/estilo.css}">
+</head>
+<body>
+    <div th:replace="~{fragments/header :: cliente}"></div>
+
+    <div class="container page-content">
+        <h1>Produtos</h1>
+
+        <div class="filter-bar">
+            <a th:href="@{/produtos}"
+               th:classappend="${categoriaSelecionada == null} ? 'active'"
+               class="filter-chip">Todos</a>
+            <a th:each="cat : ${categorias}"
+               th:href="@{/produtos(categoria=${cat})}"
+               th:classappend="${categoriaSelecionada == cat} ? 'active'"
+               th:text="${cat}"
+               class="filter-chip">Categoria</a>
+        </div>
+
+        <div class="card-grid">
+            <div class="card product-card" th:each="produto : ${produtos}">
+                <h3><a th:href="@{'/produtos/' + ${produto.id}}" th:text="${produto.nome}">Nome</a></h3>
+                <span class="category" th:text="${produto.categoria}">Categoria</span>
+                <p class="price" th:text="'R$ ' + ${produto.preco}">Preço</p>
+
+                <p class="stock"
+                   th:classappend="${!produto.ativo} ? 'out' : (${produto.quantidadeEstoque le 10} ? 'low' : '')"
+                   th:text="${produto.ativo} ? (${produto.quantidadeEstoque} + ' em estoque') : 'Indisponível'">Estoque</p>
+
+                <form th:if="${produto.ativo}" th:action="@{/carrinho/adicionar}" method="post">
+                    <input type="hidden" name="produtoId" th:value="${produto.id}">
+                    <input class="qty-input" type="number" name="quantidade" value="1" min="1" th:max="${produto.quantidadeEstoque}">
+                    <button type="submit" class="btn btn-sm">Adicionar</button>
+                </form>
+            </div>
+        </div>
+
+        <p th:if="${#lists.isEmpty(produtos)}" class="empty-state">Nenhum produto encontrado.</p>
+    </div>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>DevTeck - Meus Pedidos</title>
+    <link rel="stylesheet" th:href="@{/css/estilo.css}">
+</head>
+<body>
+    <div th:replace="~{fragments/header :: cliente}"></div>
+
+    <div class="container page-content">
+        <h1>Meus Pedidos</h1>
+
+        <div class="card order-card" th:each="pedido : ${pedidos}">
+            <div class="order-header">
+                <h3>Pedido #<span th:text="${pedido.id}">1</span></h3>
+                <span class="badge"
+                      th:classappend="${pedido.status == 'ENTREGUE'} ? 'badge-success' : (${pedido.status == 'ENVIADO'} ? 'badge-purple' : (${pedido.status == 'EM_PREPARACAO'} ? 'badge-info' : 'badge-warning'))"
+                      th:text="${pedido.status == 'PENDENTE'} ? 'Aguardando' : (${pedido.status == 'EM_PREPARACAO'} ? 'Em Preparação' : (${pedido.status == 'ENVIADO'} ? 'Enviado' : 'Entregue'))">
+                    Status
+                </span>
+            </div>
+            <p class="meta" th:text="'Data: ' + ${pedido.dataPedido}">Data</p>
+            <p class="meta" th:text="'Endereço: ' + ${pedido.enderecoEntrega}">Endereço</p>
+
+            <ul>
+                <li th:each="item : ${pedido.itens}">
+                    <span th:text="${item.quantidade} + 'x ' + ${item.nomeProduto}">1x Produto</span>
+                    <span th:text="'R$ ' + ${item.calcularSubtotal()}">R$ 0.00</span>
+                </li>
+            </ul>
+
+            <p class="order-total" th:text="'Total: R$ ' + ${pedido.valorTotal}">Total</p>
+        </div>
+
+        <p th:if="${#lists.isEmpty(pedidos)}" class="empty-state">Você ainda não fez nenhum pedido.</p>
+
+        <p><a th:href="@{/produtos}">Continuar Comprando</a></p>
+    </div>
+</body>
+</html>

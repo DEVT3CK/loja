@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>DevTeck - Erro no sistema</title>
+    <link rel="stylesheet" th:href="@{/css/estilo.css}">
+</head>
+<body class="center-page">
+    <div class="center-card">
+        <h1>500 - Erro Interno</h1>
+        <p th:if="${mensagem}" th:text="${mensagem}" class="alert alert-error">Ocorreu um erro inesperado.</p>
+        <p style="margin-top: 1.5rem; text-align: center;">
+            <a th:href="@{/}" class="btn">Voltar para a página inicial</a>
+        </p>
+    </div>
+</body>
+</html>

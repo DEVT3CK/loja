@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>DevTeck - Criar Conta</title>
+    <link rel="stylesheet" th:href="@{/css/estilo.css}">
+</head>
+<body class="center-page">
+    <div class="center-card center-card-wide">
+        <h1>Criar Conta</h1>
+
+        <p th:if="${erro}" th:text="${erro}" class="alert alert-error">Erro</p>
+
+        <div th:if="${#fields.hasErrors('*')}" class="alert alert-error">
+            <ul style="margin: 0; padding-left: 1.2rem;">
+                <li th:each="err : ${#fields.errors('*')}" th:text="${err}">Erro de validação</li>
+            </ul>
+        </div>
+
+        <form th:action="@{/cadastro}" th:object="${clienteRequest}" method="post">
+            <div class="field">
+                <label for="nome">Nome Completo</label>
+                <input type="text" id="nome" th:field="*{nome}" required>
+            </div>
+            <div class="field">
+                <label for="email">Email</label>
+                <input type="email" id="email" th:field="*{email}" required>
+            </div>
+            <div class="field">
+                <label for="senha">Senha</label>
+                <input type="password" id="senha" th:field="*{senha}" required>
+            </div>
+            <div class="field">
+                <label for="telefone">Telefone</label>
+                <input type="text" id="telefone" th:field="*{telefone}">
+            </div>
+            <div class="field">
+                <label for="endereco">Endereço</label>
+                <input type="text" id="endereco" th:field="*{endereco}">
+            </div>
+            <div class="field">
+                <label for="cep">CEP</label>
+                <input type="text" id="cep" th:field="*{cep}">
+            </div>
+            <div class="field">
+                <label for="cidade">Cidade</label>
+                <input type="text" id="cidade" th:field="*{cidade}">
+            </div>
+            <div class="field">
+                <label for="estado">Estado</label>
+                <input type="text" id="estado" th:field="*{estado}">
+            </div>
+
+            <div class="form-actions">
+                <button type="submit" class="btn">Criar Conta</button>
+                <a th:href="@{/login}">Já tenho conta</a>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

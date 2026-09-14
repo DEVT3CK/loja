@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>DevTeck - Dashboard Admin</title>
+    <link rel="stylesheet" th:href="@{/css/estilo.css}">
+</head>
+<body>
+    <div th:replace="~{fragments/header :: admin}"></div>
+
+    <div class="container page-content">
+        <h1>Dashboard Admin</h1>
+
+        <div class="metric-grid">
+            <div class="card metric-card">
+                <p class="label">Faturamento Total</p>
+                <p class="value" th:text="'R$ ' + ${faturamentoTotal}">R$ 0,00</p>
+            </div>
+            <div class="card metric-card">
+                <p class="label">Total de Pedidos</p>
+                <p class="value" th:text="${totalPedidos}">0</p>
+            </div>
+            <div class="card metric-card">
+                <p class="label">Total de Produtos</p>
+                <p class="value" th:text="${totalProdutos}">0</p>
+            </div>
+            <div class="card metric-card">
+                <p class="label">Estoque Baixo</p>
+                <p class="value" th:text="${#lists.size(estoqueBaixo)}">0</p>
+            </div>
+        </div>
+
+        <h2>Produtos com Estoque Baixo</h2>
+        <ul class="stock-list">
+            <li th:each="produto : ${estoqueBaixo}">
+                <span th:text="${produto.nome}">Nome</span>
+                <span class="qty" th:text="${produto.quantidadeEstoque} + ' unidades'">0 unidades</span>
+            </li>
+        </ul>
+        <p th:if="${#lists.isEmpty(estoqueBaixo)}" class="empty-state">Nenhum produto com estoque baixo.</p>
+    </div>
+</body>
+</html>
