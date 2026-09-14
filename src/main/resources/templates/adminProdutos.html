@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>DevTeck - Gestão de Produtos</title>
+    <link rel="stylesheet" th:href="@{/css/estilo.css}">
+</head>
+<body>
+    <div th:replace="~{fragments/header :: admin}"></div>
+
+    <div class="container page-content">
+        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+            <h1 style="margin-bottom: 0;">Gestão de Produtos</h1>
+            <a th:href="@{/admin/produtos/novo}" class="btn">Novo Produto</a>
+        </div>
+
+        <div class="table-wrap" style="margin-top: 1.5rem;">
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Categoria</th>
+                        <th>Código de Barras</th>
+                        <th>Preço</th>
+                        <th>Estoque</th>
+                        <th>Status</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="produto : ${produtos}">
+                        <td th:text="${produto.nome}">Nome</td>
+                        <td th:text="${produto.categoria}">Categoria</td>
+                        <td th:text="${produto.codigoBarras}">0</td>
+                        <td th:text="'R$ ' + ${produto.preco}">0.00</td>
+                        <td th:text="${produto.quantidadeEstoque}">0</td>
+                        <td>
+                            <span class="badge" th:classappend="${produto.ativo} ? 'badge-success' : 'badge-danger'"
+                                  th:text="${produto.ativo} ? 'Disponível' : 'Indisponível'">Status</span>
+                        </td>
+                        <td>
+                            <a th:href="@{'/admin/produtos/' + ${produto.id} + '/editar'}" class="btn btn-sm btn-outline">Editar</a>
+                            <form th:action="@{'/admin/produtos/' + ${produto.id} + '/excluir'}" method="post">
+                                <button type="submit" class="btn btn-sm btn-danger">Remover</button>
+                            </form>
+                        </td>
+                    </tr>
+                    <tr th:if="${#lists.isEmpty(produtos)}">
+                        <td colspan="7" style="text-align: center; color: #6b7280;">Nenhum produto cadastrado ainda.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>

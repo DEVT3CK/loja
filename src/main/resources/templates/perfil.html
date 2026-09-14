@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>DevTeck - Meu Perfil</title>
+    <link rel="stylesheet" th:href="@{/css/estilo.css}">
+</head>
+<body>
+    <div th:replace="~{fragments/header :: cliente}"></div>
+
+    <div class="container page-content">
+        <h1 style="text-align: center;">Meu Perfil</h1>
+
+        <p th:if="${sucesso}" th:text="${sucesso}" class="alert alert-success">Sucesso</p>
+
+        <div class="card form-card" style="padding: 5rem; margin: 0 auto;">
+            <form th:action="@{/perfil}" th:object="${clienteRequest}" method="post">
+                <div class="field">
+                    <label for="nome">Nome Completo</label>
+                    <input type="text" id="nome" th:field="*{nome}" required>
+                </div>
+                <div class="field">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" th:field="*{email}" readonly>
+                </div>
+                <div class="field">
+                    <label for="senha">Nova Senha (deixe em branco para manter a atual)</label>
+                    <input type="password" id="senha" th:field="*{senha}">
+                </div>
+                <div class="field">
+                    <label for="telefone">Telefone</label>
+                    <input type="text" id="telefone" th:field="*{telefone}">
+                </div>
+                <div class="field">
+                    <label for="endereco">Endereço</label>
+                    <input type="text" id="endereco" th:field="*{endereco}">
+                </div>
+                <div class="field">
+                    <label for="cep">CEP</label>
+                    <input type="text" id="cep" th:field="*{cep}">
+                </div>
+                <div class="field">
+                    <label for="cidade">Cidade</label>
+                    <input type="text" id="cidade" th:field="*{cidade}">
+                </div>
+                <div class="field">
+                    <label for="estado">Estado</label>
+                    <input type="text" id="estado" th:field="*{estado}">
+                </div>
+
+                <button type="submit" class="btn">Salvar Alterações</button>
+            </form>
+        </div>
+
+        <div class="card form-card" style="margin: 0 auto;">
+            <h3>Zona de Perigo</h3>
+            <p style="color: #6b7280; font-size: 0.9rem;">Excluir sua conta é uma ação permanente e não pode ser desfeita.</p>
+            <form th:action="@{/perfil/excluir}" method="post"
+                  onsubmit="return confirm('Tem certeza que deseja excluir sua conta? Essa ação não pode ser desfeita.');">
+                <button type="submit" class="btn btn-danger">Excluir Minha Conta</button>
+            </form>
+        </div>
+
+        <p><a th:href="@{/produtos}">← Voltar para produtos</a></p>
+    </div>
+</body>
+</html>

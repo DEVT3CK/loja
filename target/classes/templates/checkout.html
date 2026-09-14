@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>DevTeck - Finalizar Compra</title>
+    <link rel="stylesheet" th:href="@{/css/estilo.css}">
+</head>
+<body>
+    <div th:replace="~{fragments/header :: cliente}"></div>
+
+    <div class="container page-content">
+        <h1>Finalizar Compra</h1>
+
+        <p th:if="${erro}" th:text="${erro}" class="alert alert-error">Erro</p>
+
+        <div class="card summary-card">
+            <h3>Resumo do Pedido</h3>
+            <div class="summary-line" th:each="item : ${itens}">
+                <span th:text="${item.quantidade} + 'x ' + ${item.nome}">1x Produto</span>
+                <span th:text="'R$ ' + ${item.subtotal}">R$ 0.00</span>
+            </div>
+            <div class="summary-total">
+                <span>Total</span>
+                <span th:text="'R$ ' + ${carrinho.valorTotal}">R$ 0,00</span>
+            </div>
+        </div>
+
+        <form th:action="@{/pedidos}" method="post" class="form-card" style="margin-top: 1.5rem;">
+            <div class="field">
+                <label for="enderecoEntrega">Endereço de Entrega</label>
+                <input type="text" id="enderecoEntrega" name="enderecoEntrega" required>
+            </div>
+            <button type="submit" class="btn">Confirmar Pedido</button>
+        </form>
+
+        <p style="margin-top: 1.5rem;"><a th:href="@{/carrinho}">← Voltar para o carrinho</a></p>
+    </div>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<!--
+    Este arquivo nunca é aberto como página sozinho - ele só existe
+    para ser "importado" pelas outras páginas com th:replace.
+    Cada <header> abaixo é um fragmento nomeado (th:fragment).
+-->
+<body>
+
+<header class="site-header" th:fragment="cliente">
+    <div class="container">
+        <a th:href="@{/produtos}" class="brand">DevTeck</a>
+        <nav class="nav-links">
+            <a th:href="@{/produtos}">Produtos</a>
+            <a th:href="@{/carrinho}">Carrinho</a>
+            <a th:href="@{/pedidos}">Meus Pedidos</a>
+            <a th:href="@{/perfil}">Meu Perfil</a>
+        </nav>
+        <div class="nav-user">
+            <span th:text="${session.usuarioLogado.nome}">Usuário</span>
+            <form th:action="@{/logout}" method="post">
+                <button type="submit" class="btn btn-outline btn-sm">Sair</button>
+            </form>
+        </div>
+    </div>
+</header>
+
+<header class="site-header" th:fragment="admin">
+    <div class="container">
+        <a th:href="@{/admin/dashboard}" class="brand">DevTeck Admin</a>
+        <nav class="nav-links">
+            <a th:href="@{/admin/dashboard}">Dashboard</a>
+            <a th:href="@{/admin/produtos}">Produtos</a>
+            <a th:href="@{/admin/pedidos}">Pedidos</a>
+        </nav>
+        <div class="nav-user">
+            <span th:text="${session.usuarioLogado.nome}">Admin</span>
+            <form th:action="@{/logout}" method="post">
+                <button type="submit" class="btn btn-outline btn-sm">Sair</button>
+            </form>
+        </div>
+    </div>
+</header>
+
+</body>
+</html>

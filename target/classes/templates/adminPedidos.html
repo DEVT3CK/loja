@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>DevTeck - Gestão de Pedidos</title>
+    <link rel="stylesheet" th:href="@{/css/estilo.css}">
+</head>
+<body>
+    <div th:replace="~{fragments/header :: admin}"></div>
+
+    <div class="container page-content">
+        <h1>Gestão de Pedidos</h1>
+
+        <div class="table-wrap">
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Pedido</th>
+                        <th>Data</th>
+                        <th>Endereço</th>
+                        <th>Total</th>
+                        <th>Status</th>
+                        <th>Atualizar Status</th>
+                        <th>Cancelar</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="pedido : ${pedidos}">
+                        <td th:text="'#' + ${pedido.id}">#1</td>
+                        <td th:text="${pedido.dataPedido}">Data</td>
+                        <td th:text="${pedido.enderecoEntrega}">Endereço</td>
+                        <td th:text="'R$ ' + ${pedido.valorTotal}">R$ 0.00</td>
+                        <td>
+                            <span class="badge"
+                                  th:classappend="${pedido.status == 'ENTREGUE'} ? 'badge-success' : (${pedido.status == 'ENVIADO'} ? 'badge-purple' : (${pedido.status == 'EM_PREPARACAO'} ? 'badge-info' : 'badge-warning'))"
+                                  th:text="${pedido.status == 'PENDENTE'} ? 'Aguardando' : (${pedido.status == 'EM_PREPARACAO'} ? 'Em Preparação' : (${pedido.status == 'ENVIADO'} ? 'Enviado' : 'Entregue'))">
+                                Status
+                            </span>
+                        </td>
+                        <td>
+                            <form th:action="@{'/admin/pedidos/' + ${pedido.id} + '/status'}" method="post">
+                                <select name="status">
+                                    <option value="PENDENTE" th:selected="${pedido.status == 'PENDENTE'}">Aguardando</option>
+                                    <option value="EM_PREPARACAO" th:selected="${pedido.status == 'EM_PREPARACAO'}">Em Preparação</option>
+                                    <option value="ENVIADO" th:selected="${pedido.status == 'ENVIADO'}">Enviado</option>
+                                    <option value="ENTREGUE" th:selected="${pedido.status == 'ENTREGUE'}">Entregue</option>
+                                </select>
+                                <button type="submit" class="btn btn-sm">Atualizar</button>
+                            </form>
+                        </td>
+                        <td>
+                            <form th:action="@{'/admin/pedidos/' + ${pedido.id} + '/cancelar'}" method="post"
+                                  onsubmit="return confirm('Cancelar este pedido? O estoque dos produtos será devolvido.');">
+                                <button type="submit" class="btn btn-danger btn-sm">Cancelar</button>
+                            </form>
+                        </td>
+                    </tr>
+                    <tr th:if="${#lists.isEmpty(pedidos)}">
+                        <td colspan="7" style="text-align: center; color: #6b7280;">Nenhum pedido realizado ainda.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>

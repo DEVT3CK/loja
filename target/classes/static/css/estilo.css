@@ -1,0 +1,539 @@
+/* =========================================================
+   DevTeck - estilo.css
+   Reescrito com classes explícitas (mais seguro que seletores
+   genéricos como "body > p:first-of-type", que quebravam em
+   páginas com estrutura diferente).
+   ========================================================= */
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background-color: #f9fafb;
+    color: #0a0a0a;
+    line-height: 1.6;
+}
+
+a {
+    color: #059669;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* ================= LAYOUT ================= */
+
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+}
+
+.page-content {
+    padding-bottom: 4rem;
+}
+
+/* ================= HEADER / NAVEGAÇÃO ================= */
+
+.site-header {
+    background-color: #0a0a0a;
+    color: #ffffff;
+    padding: 1rem 0;
+    margin-bottom: 2rem;
+}
+
+.site-header .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.brand {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #ffffff;
+}
+
+.brand:hover {
+    text-decoration: none;
+    color: #10b981;
+}
+
+.nav-links {
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.nav-links a {
+    color: rgba(255, 255, 255, 0.85);
+    font-weight: 500;
+}
+
+.nav-links a:hover {
+    color: #10b981;
+    text-decoration: none;
+}
+
+.nav-user {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.75);
+}
+
+.nav-user form {
+    margin: 0;
+}
+
+.nav-user .btn-outline {
+    color: #ffffff;
+}
+
+.nav-user .btn-outline:hover {
+    color: #ffffff;
+}
+
+/* ================= TIPOGRAFIA ================= */
+
+h1 {
+    color: #059669;
+    font-size: 1.9rem;
+    margin: 0 0 1.5rem;
+}
+
+h2 {
+    font-size: 1.3rem;
+    margin: 1.75rem 0 1rem;
+}
+
+h3 {
+    font-size: 1.05rem;
+    margin: 0 0 0.5rem;
+}
+
+/* ================= BOTÕES ================= */
+
+.btn {
+    display: inline-block;
+    background-color: #10b981;
+    color: #ffffff;
+    border: none;
+    padding: 0.65rem 1.3rem;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    cursor: pointer;
+    text-decoration: none;
+    text-align: center;
+}
+
+.btn:hover {
+    background-color: #059669;
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.btn-outline {
+    background-color: transparent;
+    border: 2px solid #10b981;
+    color: #059669;
+    padding: calc(0.65rem - 2px) calc(1.3rem - 2px);
+}
+
+.btn-outline:hover {
+    background-color: #10b981;
+    color: #ffffff;
+}
+
+.btn-danger {
+    background-color: #ef4444;
+}
+
+.btn-danger:hover {
+    background-color: #dc2626;
+}
+
+.btn-sm {
+    padding: 0.4rem 0.9rem;
+    font-size: 0.85rem;
+}
+
+.btn-block {
+    display: block;
+    width: 100%;
+}
+
+/* ================= FILTRO DE CATEGORIA (RF06) ================= */
+
+.filter-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin-bottom: 1.5rem;
+}
+
+.filter-chip {
+    display: inline-block;
+    padding: 0.4rem 0.9rem;
+    border-radius: 999px;
+    border: 1px solid #d1d5db;
+    background-color: #ffffff;
+    color: #374151;
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+.filter-chip:hover {
+    border-color: #10b981;
+    color: #059669;
+    text-decoration: none;
+}
+
+.filter-chip.active {
+    background-color: #10b981;
+    border-color: #10b981;
+    color: #ffffff;
+}
+
+/* ================= CARDS ================= */
+
+.card {
+    background-color: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+    padding: 1.25rem;
+    margin-bottom: 1rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+}
+
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 1.25rem;
+    margin-bottom: 1.5rem;
+}
+
+.product-card .category {
+    display: inline-block;
+    color: #6b7280;
+    font-size: 0.8rem;
+    background: #f3f4f6;
+    padding: 0.15rem 0.6rem;
+    border-radius: 999px;
+    margin-bottom: 0.6rem;
+}
+
+.product-card .price {
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: #059669;
+    margin: 0.4rem 0;
+}
+
+.product-card .stock {
+    font-size: 0.85rem;
+    color: #6b7280;
+    margin-bottom: 0.75rem;
+}
+
+.product-card .stock.low {
+    color: #d97706;
+    font-weight: 600;
+}
+
+.product-card .stock.out {
+    color: #dc2626;
+    font-weight: 600;
+}
+
+.qty-input {
+    width: 70px;
+    display: inline-block;
+    margin-right: 0.5rem;
+    vertical-align: middle;
+}
+
+/* ================= MÉTRICAS (dashboard) ================= */
+
+.metric-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.metric-card .label {
+    color: #6b7280;
+    font-size: 0.85rem;
+    margin-bottom: 0.4rem;
+}
+
+.metric-card .value {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #0a0a0a;
+}
+
+/* ================= LISTA DE ESTOQUE BAIXO ================= */
+
+.stock-list {
+    list-style: none;
+    margin: 0 0 1.5rem;
+    padding: 0;
+}
+
+.stock-list li {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.75rem 1rem;
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    margin-bottom: 0.5rem;
+}
+
+.stock-list .qty {
+    color: #d97706;
+    font-weight: 700;
+}
+
+/* ================= FORMULÁRIOS ================= */
+
+.form-card {
+    max-width: 560px;
+}
+
+.field {
+    width: 100%;
+    margin-bottom: 1.1rem;
+}
+
+.field label {
+    display: block;
+    font-weight: 600;
+    font-size: 0.9rem;
+    margin-bottom: 0.35rem;
+}
+
+input, select, textarea {
+    width: 100%;
+    max-width: 420px;
+    padding: 0.6rem 0.75rem;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-family: inherit;
+    background-color: #ffffff;
+}
+
+input[readonly] {
+    background-color: #f3f4f6;
+    color: #6b7280;
+}
+
+input:focus, select:focus, textarea:focus {
+    outline: none;
+    border-color: #10b981;
+    box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.2);
+}
+
+textarea {
+    min-height: 90px;
+    resize: vertical;
+}
+
+.form-actions {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 1.25rem;
+}
+
+/* ================= TABELAS ================= */
+
+.table-wrap {
+    overflow-x: auto;
+    margin-bottom: 1.5rem;
+}
+
+table.data-table {
+    border-collapse: collapse;
+    width: 100%;
+    background: #ffffff;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+}
+
+table.data-table thead {
+    background-color: #0a0a0a;
+    color: #ffffff;
+}
+
+table.data-table th,
+table.data-table td {
+    padding: 0.75rem 1rem;
+    text-align: left;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+table.data-table tbody tr:hover {
+    background-color: #f9fafb;
+}
+
+table.data-table form {
+    display: inline;
+    margin: 0;
+}
+
+table.data-table select {
+    width: auto;
+    display: inline-block;
+    max-width: 160px;
+    margin-right: 0.5rem;
+}
+
+/* ================= BADGES ================= */
+
+.badge {
+    display: inline-block;
+    padding: 0.25rem 0.7rem;
+    border-radius: 999px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.badge-success { background: #d1fae5; color: #059669; }
+.badge-danger  { background: #fee2e2; color: #dc2626; }
+.badge-warning { background: #fef3c7; color: #b45309; }
+.badge-info    { background: #dbeafe; color: #2563eb; }
+.badge-purple  { background: #ede9fe; color: #7c3aed; }
+
+/* ================= ALERTAS ================= */
+
+.alert {
+    padding: 0.85rem 1.1rem;
+    border-radius: 8px;
+    margin-bottom: 1.25rem;
+    font-weight: 500;
+}
+
+.alert-error {
+    background: #fee2e2;
+    border: 1px solid #ef4444;
+    color: #b91c1c;
+}
+
+.alert-success {
+    background: #d1fae5;
+    border: 1px solid #10b981;
+    color: #047857;
+}
+
+/* ================= RESUMO (carrinho / checkout) ================= */
+
+.summary-card {
+    max-width: 380px;
+}
+
+.summary-line {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.35rem 0;
+}
+
+.summary-total {
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.3rem;
+    font-weight: 700;
+    border-top: 2px solid #e5e7eb;
+    padding-top: 0.75rem;
+    margin-top: 0.5rem;
+}
+
+/* ================= PEDIDOS (cliente) ================= */
+
+.order-card .order-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.order-card .meta {
+    color: #6b7280;
+    font-size: 0.85rem;
+    margin-bottom: 0.2rem;
+}
+
+.order-card ul {
+    list-style: none;
+    padding: 0;
+    margin: 0.75rem 0;
+}
+
+.order-card li {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.35rem 0;
+    border-bottom: 1px dashed #e5e7eb;
+    font-size: 0.9rem;
+}
+
+.order-card .order-total {
+    text-align: right;
+    font-weight: 700;
+    font-size: 1.1rem;
+    margin-top: 0.5rem;
+}
+
+/* ================= ESTADOS VAZIOS ================= */
+
+.empty-state {
+    text-align: center;
+    padding: 3rem 1rem;
+    color: #6b7280;
+}
+
+/* ================= PÁGINAS CENTRALIZADAS (login, cadastro, home) ================= */
+
+body.center-page {
+    max-width: 100%;
+    min-height: 100vh;
+    margin: 0;
+    padding: 2rem 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #0a0a0a 0%, #064e3b 100%);
+}
+
+.center-card {
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 20px 40px rgba(21, 21, 21, 0.25);
+    padding: 2.5rem;
+    width: 100%;
+    max-width: 400px;
+}
+
+.center-card-wide {
+    max-width: 480px;
+}
+
+.center-card h1 {
+    text-align: center;
+}
